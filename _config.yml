@@ -1,0 +1,80 @@
+# 站点配置
+title: "穹顶洞察 · 测井行业技术情报"
+description: "每日追踪全球石油测井领域前沿动态"
+author: "穹顶洞察"
+email: ""
+
+# 站点URL
+url: "https://logging.harryliu.cn"
+baseurl: ""
+
+# 构建设置
+markdown: kramdown
+highlighter: rouge
+permalink: /:year/:month/:day/:title/
+
+# 时区
+timezone: Asia/Shanghai
+
+# 分页
+paginate: 10
+paginate_path: "/page/:num/"
+
+# 插件
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-paginate
+
+# 集合
+collections:
+  posts:
+    output: true
+    permalink: /:year/:month/:day/:title/
+
+# 默认设置
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "穹顶洞察"
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+
+# 分类
+categories:
+  - 随钻测井
+  - 电缆测井
+  - 声波测井
+  - 核测井
+  - 成像测井
+  - 智能测井
+  - 生产测井
+  - 套管检测
+  - 地层评价
+  - 测井装备
+  - 行业动态
+  - 学术会议
+
+# 社交链接
+github_username: harryfhliu
+
+# 分析（可选）
+google_analytics: 
+
+# 排除文件
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .sass-cache
+  - .jekyll-cache
+  - .jekyll-metadata
+  - README.md
+  - LICENSE

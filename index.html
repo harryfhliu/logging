@@ -1,0 +1,131 @@
+---
+layout: default
+---
+
+<!-- 英雄区 -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1 class="hero-title">穹顶洞察 · 测井行业技术情报</h1>
+            <p class="hero-subtitle">每日追踪全球石油测井领域前沿动态，汇聚行业最新技术突破与市场趋势</p>
+            
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number">{{ site.posts | size }}</span>
+                    <span class="stat-label">期简报</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">12</span>
+                    <span class="stat-label">技术分类</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">关注企业</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <!-- 最新简报 -->
+    {% if site.posts.first %}
+    <section class="latest-post">
+        <div class="section-header">
+            <h2>📰 最新简报</h2>
+            <a href="{{ '/archive' | relative_url }}" class="view-all">查看全部 →</a>
+        </div>
+        
+        {% assign latest = site.posts.first %}
+        <article class="post-card post-card-featured">
+            <div class="post-card-header">
+                <div class="post-card-date">
+                    {{ latest.date | date: '%Y年%m月%d日' }}
+                </div>
+                <h3 class="post-card-title">
+                    <a href="{{ latest.url | relative_url }}">{{ latest.title }}</a>
+                </h3>
+            </div>
+            
+            <div class="post-card-excerpt">
+                {{ latest.excerpt | strip_html | truncate: 200 }}
+            </div>
+            
+            <div class="post-card-footer">
+                <div class="category-tags">
+                    {% for category in latest.categories limit:3 %}
+                    <a href="{{ '/categories/#' | append: category | relative_url }}" class="category-tag">{{ category }}</a>
+                    {% endfor %}
+                </div>
+                <a href="{{ latest.url | relative_url }}" class="read-more">阅读全文 →</a>
+            </div>
+        </article>
+    </section>
+    {% endif %}
+
+    <!-- 近期简报列表 -->
+    {% if site.posts.size > 1 %}
+    <section class="recent-posts">
+        <div class="section-header">
+            <h2>📋 近期简报</h2>
+        </div>
+        
+        <div class="post-list">
+            {% for post in site.posts offset:1 limit:5 %}
+            <article class="post-list-item">
+                <div class="post-list-date">
+                    <span class="date-day">{{ post.date | date: '%d' }}</span>
+                    <span class="date-month">{{ post.date | date: '%b' }}</span>
+                </div>
+                <div class="post-list-content">
+                    <h4 class="post-list-title">
+                        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+                    </h4>
+                    <p class="post-list-summary">{{ post.excerpt | strip_html | truncate: 120 }}</p>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- 快速导航 -->
+    <section class="quick-nav">
+        <div class="section-header">
+            <h2>🧭 快速导航</h2>
+        </div>
+        
+        <div class="categories-grid">
+            <a href="{{ '/categories/#随钻测井' | relative_url }}" class="category-card">
+                <div class="category-icon">🎯</div>
+                <div class="category-name">随钻测井</div>
+                <div class="category-count">LWD/MWD技术</div>
+            </a>
+            <a href="{{ '/categories/#电缆测井' | relative_url }}" class="category-card">
+                <div class="category-icon">🔌</div>
+                <div class="category-name">电缆测井</div>
+                <div class="category-count">Wireline技术</div>
+            </a>
+            <a href="{{ '/categories/#智能测井' | relative_url }}" class="category-card">
+                <div class="category-icon">🤖</div>
+                <div class="category-name">智能测井</div>
+                <div class="category-count">AI/数字化</div>
+            </a>
+            <a href="{{ '/categories/#地层评价' | relative_url }}" class="category-card">
+                <div class="category-icon">📊</div>
+                <div class="category-name">地层评价</div>
+                <div class="category-count">Formation Evaluation</div>
+            </a>
+            <a href="{{ '/categories/#套管检测' | relative_url }}" class="category-card">
+                <div class="category-icon">🔍</div>
+                <div class="category-name">套管检测</div>
+                <div class="category-count">Casing Inspection</div>
+            </a>
+            <a href="{{ '/categories/#行业动态' | relative_url }}" class="category-card">
+                <div class="category-icon">📈</div>
+                <div class="category-name">行业动态</div>
+                <div class="category-count">市场与新闻</div>
+            </a>
+        </div>
+    </section>
+</div>

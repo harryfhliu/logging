@@ -1,0 +1,45 @@
+---
+layout: page
+title: 简报归档
+subtitle: 历史测井行业要闻简报存档
+permalink: /archive/
+---
+
+{% assign posts_by_year = site.posts | group_by_exp: 'post', 'post.date | date: "%Y"' %}
+
+{% for year in posts_by_year %}
+<section class="archive-section">
+    <h2 class="archive-year">{{ year.name }}年</h2>
+    
+    {% assign posts_by_month = year.items | group_by_exp: 'post', 'post.date | date: "%m"' %}
+    
+    {% for month in posts_by_month %}
+    <div class="archive-month">
+        <h3 class="archive-month-title">{{ month.name }}月</h3>
+        
+        <div class="post-list">
+            {% for post in month.items %}
+            <article class="post-list-item">
+                <div class="post-list-date">
+                    <span class="date-day">{{ post.date | date: '%d' }}</span>
+                    <span class="date-month">{{ post.date | date: '%a' }}</span>
+                </div>
+                <div class="post-list-content">
+                    <h4 class="post-list-title">
+                        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+                    </h4>
+                    <p class="post-list-summary">{{ post.excerpt | strip_html | truncate: 100 }}</p>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+</section>
+{% endfor %}
+
+{% if site.posts.size == 0 %}
+<div class="empty-state">
+    <p>暂无简报内容，敬请期待...</p>
+</div>
+{% endif %}

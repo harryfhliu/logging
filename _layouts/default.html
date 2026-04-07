@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+    <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+    
+    <!-- SEO -->
+    {% seo %}
+    
+    <!-- 样式 -->
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+    
+    <!-- Feed -->
+    {% feed_meta %}
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛢️</text></svg>">
+</head>
+<body>
+    <!-- 头部导航 -->
+    <header class="site-header">
+        <div class="container">
+            <nav class="main-nav">
+                <a href="{{ '/' | relative_url }}" class="site-logo">
+                    <span class="logo-icon">🛢️</span>
+                    <div class="logo-text">
+                        <span class="logo-title">穹顶洞察</span>
+                        <span class="logo-subtitle">测井行业技术情报</span>
+                    </div>
+                </a>
+                
+                <button class="mobile-menu-toggle" aria-label="菜单">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                
+                <ul class="nav-menu">
+                    <li><a href="{{ '/' | relative_url }}">首页</a></li>
+                    <li><a href="{{ '/archive' | relative_url }}">归档</a></li>
+                    <li><a href="{{ '/categories' | relative_url }}">分类</a></li>
+                    <li><a href="{{ '/about' | relative_url }}">关于</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 主要内容 -->
+    <main class="site-content">
+        {{ content }}
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="footer-icon">🛢️</span>
+                    <span class="footer-title">穹顶洞察</span>
+                </div>
+                <p class="footer-desc">每日追踪全球石油测井领域前沿动态</p>
+                <div class="footer-links">
+                    <a href="{{ '/feed.xml' | relative_url }}">RSS订阅</a>
+                    <span class="separator">·</span>
+                    <a href="https://github.com/harryfhliu/logging" target="_blank">GitHub</a>
+                </div>
+                <p class="footer-copyright">
+                    © {{ site.time | date: '%Y' }} 穹顶洞察 · 保留所有权利
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+</body>
+</html>
