@@ -16,6 +16,9 @@ permalink: /:year/:month/:day/:title/
 # 时区
 timezone: Asia/Shanghai
 
+# 允许发布未来日期的文章
+future: true
+
 # 分页
 paginate: 10
 paginate_path: "/page/:num/"
