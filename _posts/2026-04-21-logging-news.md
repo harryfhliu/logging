@@ -43,9 +43,6 @@ excerpt: "本期简报涵盖2026中国油气工程技术交流大会在成都举
 1. **SPWLA第67届年会将于2026年5月在美国德克萨斯州举行**  
    - SPWLA | 学术会议 | [SPWLA](https://www.spwla.org/Symposium/Symposium/Default.aspx)
 
-2. **SPWLA第67届年会将于2026年5月在德克萨斯州康罗举行**  
-   - SPWLA | 学术会议 | [SPWLA](https://www.spwla.org/Symposium/Symposium/Default.aspx)
-
 ---
 
 *本简报由穹顶洞察编辑分析，仅供参考。如需更详细的技术资料，请访问相关链接或联系技术提供方。*
