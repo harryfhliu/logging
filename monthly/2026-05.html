@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026年5月测井行业发展趋势分析月报 — 穹顶洞察</title>
+<meta name="description" content="基于2026年5月共计37条国内外测井行业新闻数据的综合分析报告。覆盖OTC 2026、SPWLA第67届年会、人工智能测井等重大事件。">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --primary: #1a3a5c;
+    --primary-light: #2c5f8a;
+    --accent: #d4a843;
+    --accent-light: #f0d68a;
+    --bg: #f8f9fb;
+    --card: #ffffff;
+    --text: #2d3436;
+    --text-light: #636e72;
+    --border: #e8ecf1;
+    --danger: #e74c3c;
+    --success: #27ae60;
+    --warning: #f39c12;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans SC', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+  }
+  
+  /* Header */
+  .report-header {
+    background: linear-gradient(135deg, #0d2137 0%, #1a3a5c 50%, #2c5f8a 100%);
+    color: white;
+    padding: 60px 0 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .report-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(ellipse at 30% 50%, rgba(212,168,67,0.08) 0%, transparent 50%);
+  }
+  .report-header h1 {
+    font-size: 2.2em;
+    font-weight: 700;
+    letter-spacing: 2px;
+    position: relative;
+  }
+  .report-header .subtitle {
+    font-size: 1.1em;
+    opacity: 0.85;
+    margin-top: 8px;
+    position: relative;
+  }
+  .report-header .meta {
+    margin-top: 18px;
+    font-size: 0.9em;
+    opacity: 0.7;
+    position: relative;
+  }
+  .report-header .badge-row {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .badge {
+    display: inline-block;
+    padding: 5px 16px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 500;
+  }
+  .badge-primary { background: rgba(212,168,67,0.2); color: var(--accent-light); border: 1px solid rgba(212,168,67,0.3); }
+  .badge-info { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.9); border: 1px solid rgba(255,255,255,0.15); }
+
+  /* Container */
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+  /* Section */
+  .section { padding: 40px 0; }
+  .section-title {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid var(--accent);
+    display: inline-block;
+  }
+  .section-subtitle {
+    font-size: 1.15em;
+    font-weight: 600;
+    color: var(--primary-light);
+    margin-bottom: 15px;
+  }
+
+  /* Stats cards */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin: 30px 0;
+  }
+  .stat-card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border: 1px solid var(--border);
+  }
+  .stat-card .number {
+    font-size: 2.4em;
+    font-weight: 800;
+    color: var(--primary);
+  }
+  .stat-card .label {
+    font-size: 0.88em;
+    color: var(--text-light);
+    margin-top: 4px;
+  }
+  .stat-card .sub-number {
+    font-size: 1em;
+    font-weight: 600;
+    color: var(--accent);
+    margin-top: 2px;
+  }
+  .stat-card.accent .number { color: var(--accent); }
+  .stat-card.green .number { color: var(--success); }
+
+  /* Chart grid */
+  .chart-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin: 30px 0;
+  }
+  @media (max-width: 768px) {
+    .chart-grid { grid-template-columns: 1fr; }
+  }
+  .chart-card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border: 1px solid var(--border);
+  }
+  .chart-card h4 {
+    font-size: 1em;
+    color: var(--text-light);
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+  .chart-card canvas { width: 100% !important; height: auto !important; max-height: 280px; }
+
+  /* Timeline */
+  .timeline { position: relative; padding-left: 30px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--accent), var(--primary-light));
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 24px;
+    padding-left: 20px;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -24px;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid white;
+    box-shadow: 0 0 0 2px var(--accent);
+  }
+  .timeline-item.imp5::before { background: var(--danger); box-shadow: 0 0 0 2px var(--danger); }
+  .timeline-item.imp4::before { background: var(--warning); box-shadow: 0 0 0 2px var(--warning); }
+  .timeline-date {
+    font-size: 0.82em;
+    color: var(--text-light);
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+  .timeline-title {
+    font-size: 1.05em;
+    font-weight: 600;
+    color: var(--primary);
+  }
+  .timeline-summary {
+    font-size: 0.9em;
+    color: var(--text-light);
+    margin-top: 4px;
+  }
+
+  /* News table */
+  .news-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 0.9em;
+  }
+  .news-table th {
+    background: var(--primary);
+    color: white;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+  }
+  .news-table td {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .news-table tr:hover td { background: #f0f4f9; }
+  .news-table .imp-tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 0.78em;
+    font-weight: 600;
+  }
+  .imp-5 { background: #fde8e8; color: #c0392b; }
+  .imp-4 { background: #fef5e7; color: #d68910; }
+  .imp-3 { background: #eaf2f8; color: #2e86c1; }
+  .imp-2 { background: #f2f4f4; color: #839192; }
+
+  /* Highlight box */
+  .highlight-box {
+    background: linear-gradient(135deg, #fef9e7, #fdebd0);
+    border-left: 4px solid var(--accent);
+    padding: 20px 24px;
+    border-radius: 0 12px 12px 0;
+    margin: 24px 0;
+  }
+  .highlight-box h4 { color: var(--primary); margin-bottom: 8px; }
+
+  /* Key findings */
+  .key-findings {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 24px 0;
+  }
+  @media (max-width: 768px) { .key-findings { grid-template-columns: 1fr; } }
+  .finding-card {
+    background: var(--card);
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border: 1px solid var(--border);
+  }
+  .finding-card h4 { color: var(--primary); margin-bottom: 10px; font-size: 1.05em; }
+  .finding-card p { color: var(--text-light); font-size: 0.92em; line-height: 1.6; }
+
+  /* Company spotlight */
+  .company-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin: 24px 0;
+  }
+  .company-card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  }
+  .company-card h4 { color: var(--primary); font-size: 1.05em; }
+  .company-card .count {
+    display: inline-block;
+    background: var(--primary);
+    color: white;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 0.8em;
+    margin-left: 8px;
+  }
+  .company-card ul { margin-top: 8px; list-style: none; }
+  .company-card ul li {
+    font-size: 0.85em;
+    color: var(--text-light);
+    padding: 3px 0;
+    padding-left: 14px;
+    position: relative;
+  }
+  .company-card ul li::before {
+    content: '•';
+    position: absolute;
+    left: 2px;
+    color: var(--accent);
+  }
+
+  /* Footer */
+  .report-footer {
+    background: var(--primary);
+    color: rgba(255,255,255,0.7);
+    text-align: center;
+    padding: 30px 0;
+    font-size: 0.88em;
+  }
+  .report-footer strong { color: rgba(255,255,255,0.9); }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .report-header h1 { font-size: 1.5em; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .stat-card { padding: 16px; }
+    .stat-card .number { font-size: 1.8em; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="report-header">
+  <h1>2026年5月 · 测井行业发展趋势分析月报</h1>
+  <div class="subtitle">基于数据库37条新闻数据的综合分析报告</div>
+  <div class="badge-row">
+    <span class="badge badge-primary">编制单位：穹顶洞察</span>
+    <span class="badge badge-info">报告周期：2026年5月1日 — 5月31日</span>
+    <span class="badge badge-info">共收录：37条新闻</span>
+  </div>
+  <div class="meta">发布日期：2026年6月3日</div>
+</header>
+
+<div class="container">
+
+<!-- ============ EXECUTIVE SUMMARY ============ -->
+<div class="section">
+  <h2 class="section-title">📊 月度总览</h2>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="number">37</div>
+      <div class="label">收录新闻总数</div>
+    </div>
+    <div class="stat-card accent">
+      <div class="number">22</div>
+      <div class="label">重要新闻（等级≥4）</div>
+      <div class="sub-number">占比 59.5%</div>
+    </div>
+    <div class="stat-card green">
+      <div class="number">5</div>
+      <div class="label">重磅新闻（等级5）</div>
+      <div class="sub-number">行业里程碑事件</div>
+    </div>
+    <div class="stat-card">
+      <div class="number">12</div>
+      <div class="label">覆盖专业分类</div>
+      <div class="sub-number">全技术链条覆盖</div>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <h4>📌 本月核心判断</h4>
+    <p style="font-size:0.95em; line-height:1.8;">
+      2026年5月是测井行业技术创新的密集爆发期。<strong>两大国际会议（OTC 2026和SPWLA第67届年会）</strong>同期举行，集中展示了全球测井领域的最新突破。<br><br>
+      <strong>三大趋势尤为突出：</strong>一是<strong>AI与自主化</strong>全面渗透测井全链路，从自主建井、AI智能体到数字专家；二是<strong>中国企业加速技术出海</strong>，CPLog装备拓展41国、长城测井刷新国际纪录；三是<strong>深地/超高温测井</strong>技术持续突破，215°C/207MPa智能钻头、万米深层评价等成果频现。
+    </p>
+  </div>
+</div>
+
+<!-- ============ WEEK DISTRIBUTION ============ -->
+<div class="section">
+  <h2 class="section-title">📅 新闻时间分布</h2>
+  <div class="chart-grid">
+    <div class="chart-card">
+      <h4>周度新闻量分布</h4>
+      <canvas id="weekChart"></canvas>
+    </div>
+    <div class="chart-card">
+      <h4>重要等级分布</h4>
+      <canvas id="impChart"></canvas>
+    </div>
+  </div>
+</div>
+
+<!-- ============ CATEGORY ANALYSIS ============ -->
+<div class="section">
+  <h2 class="section-title">🏷️ 分类分析</h2>
+  <div class="chart-grid">
+    <div class="chart-card">
+      <h4>专业分类分布</h4>
+      <canvas id="catChart"></canvas>
+    </div>
+    <div class="chart-card">
+      <h4>分类平均重要等级</h4>
+      <canvas id="catImpChart"></canvas>
+    </div>
+  </div>
+</div>
+
+<!-- ============ KEY FINDINGS ============ -->
+<div class="section">
+  <h2 class="section-title">🔍 五大关键发现</h2>
+  <div class="key-findings">
+    <div class="finding-card">
+      <h4>🏆 OTC 2026：测井技术获奖大年</h4>
+      <p>OTC 2026颁发17项Spotlight on New Technology Award，SLB Retina钻头成像系统、Baker Hughes Kantori自主建井方案、CNPC超高温智能钻头等测井相关技术占据近半数席位。中国石油两项技术同时获奖，表明国内深地测井装备已达到国际一流水平。</p>
+    </div>
+    <div class="finding-card">
+      <h4>🤖 AI智能测井：从概念走向规模应用</h4>
+      <p>5月智能测井新闻占比21.6%（8条），涵盖神开"蓝小智"AI智能体、中石油"数智中国石油"大模型、石化油服智能化测井液压控制系统等。AI已从单一环节应用延伸至建井全流程智能化，大模型成为智能体的核心大脑。</p>
+    </div>
+    <div class="finding-card">
+      <h4>🌏 中国测井技术加速全球化</h4>
+      <p>中油测井CPLog装备已销往41国，自主装备占比从41.9%升至80.3%。长城测井在哈萨克斯坦创6米长枪身射孔纪录（国际同行上限3米），中海油服完井增产技术在亚、中东规模化应用。中国测井品牌的国际影响力正显著提升。</p>
+    </div>
+    <div class="finding-card">
+      <h4>📡 SPWLA年会聚焦地层评价前沿</h4>
+      <p>第67届SPWLA年会（5月16-20日）在德州康罗湖举行，聚焦常规与非常规储层评价、AI测井应用、NMR测井进展等前沿议题。Halliburton在年会上推出Xaminer Deep Testing深部瞬态测试新技术，进一步丰富了地层评价工具链。</p>
+    </div>
+    <div class="finding-card" style="grid-column: 1/-1;">
+      <h4>💡 专利密集发布：中国油服公司技术储备深度显现</h4>
+      <p>5月共有6条国内企业专利相关新闻，涵盖测井仪器智能控制、快速测井相划分、分体导流头、井口可视化监测、偏方位射孔、井下定量注油等多个方向。中石化经纬、中海油服成为专利主力军，专利布局呈现系统化、体系化特征。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ TIMELINE ============ -->
+<div class="section">
+  <h2 class="section-title">📆 本月大事记</h2>
+  
+  <h3 class="section-subtitle" style="margin-top:16px;">第1周（5/1-5/10）：OTC 2026开幕周</h3>
+  <div class="timeline">
+    <div class="timeline-item imp5">
+      <div class="timeline-date">5月1日</div>
+      <div class="timeline-title">SLB获两项OTC聚焦新技术奖</div>
+      <div class="timeline-summary">Retina钻头成像系统与FIV-III地层隔离阀获OTC Spotlight Award，重新定义随钻地层评价方式。</div>
+    </div>
+    <div class="timeline-item imp4">
+      <div class="timeline-date">5月2日</div>
+      <div class="timeline-title">Halliburton EarthStar 3DX获OTC Asia新技术奖</div>
+      <div class="timeline-summary">业内最接近钻头的超深电阻率传感器，可提前探测地层和流体边界。</div>
+    </div>
+    <div class="timeline-item imp5">
+      <div class="timeline-date">5月4日</div>
+      <div class="timeline-title">OTC 2026揭幕，17项新技术获奖</div>
+      <div class="timeline-summary">OTC 2026于休斯顿开幕，Baker Hughes Kantori自主建井、CNPC超高温智能钻头等17项技术获奖。约30,000人参会。</div>
+    </div>
+    <div class="timeline-item imp4">
+      <div class="timeline-date">5月4日</div>
+      <div class="timeline-title">Equinor续签170亿克朗钻井服务协议</div>
+      <div class="timeline-summary">SLB、Halliburton、Baker Hughes获83亿克朗综合合同，Weatherford等18家企业获专业服务协议。</div>
+    </div>
+    <div class="timeline-item imp5">
+      <div class="timeline-date">5月6日</div>
+      <div class="timeline-title">中国石油两项技术获OTC大奖</div>
+      <div class="timeline-summary">超高温高压智能钻头（215°C/207MPa）和膨胀管等井径钻井技术同时获奖，创国内先河。</div>
+    </div>
+    <div class="timeline-item imp4">
+      <div class="timeline-date">5月6日</div>
+      <div class="timeline-title">Halliburton宣布SPWLA发布深部瞬态测试技术</div>
+      <div class="timeline-summary">Reservoir Xaminer系列最新成员，在钻前提供早期油藏智能。</div>
+    </div>
+  </div>
+
+  <h3 class="section-subtitle" style="margin-top:28px;">第2-3周（5/11-5/20）：SPWLA年会周 · 国内专利密集期</h3>
+  <div class="timeline">
+    <div class="timeline-item imp4">
+      <div class="timeline-date">5月8日</div>
+      <div class="timeline-title">中石化经纬等4公司申请测井仪器智能控制专利</div>
+      <div class="timeline-summary">实现七参数测井仪器与阵列流量仪器的灵活切换，提升测井效率。</div>
+    </div>
+    <div class="timeline-item imp4">
+      <div class="timeline-date">5月12日</div>
+      <div class="timeline-title">神开股份推出"蓝小智"AI智能体</div>
+      <div class="timeline-summary">专为油气建井打造的AI智能体，具备钻井参数优化、风险预警、设备诊断等能力。</div>
+    </div>
+    <div class="timeline-item imp5">
+      <div class="timeline-date">5月14日</div>
+      <div class="timeline-title">西南油气田测井解释符合率突破90%</div>
+      <div class="timeline-summary">创新基于核磁可动油孔隙度的甜点区评价新技术，累计服务756口井，构建测井数据湖和智能大脑。</div>
+    </div>
+    <div class="timeline-item imp5">
+      <div class="timeline-date">5月15日</div>
+      <div class="timeline-title">中油测井CPLog装备拓展41国市场</div>
+      <div class="timeline-summary">CPLog已形成六大系列190种产品，自主装备占比80.3%，技术服务覆盖28国。</div>
+    </div>
+    <div class="timeline-item imp4">
+      <div class="timeline-date">5月15日</div>
+      <div class="timeline-title">油气产业AI大会在京举行</div>
+      <div class="timeline-summary">中石油推进数智融合、中石化发布"烽火"工业智能体、刘合院士指出大模型核心价值。</div>
+    </div>
+    <div class="timeline-item imp3">
+      <div class="timeline-date">5月16-20日</div>
+      <div class="timeline-title">SPWLA第67届年会举行</div>
+      <div class="timeline-summary">聚焦常规/非常规储层评价、AI测井、NMR测井、无放射源核测井等前沿议题。</div>
+    </div>
+  </div>
+
+  <h3 class="section-subtitle" style="margin-top:28px;">第4-5周（5/21-5/31）：技术成果深化期</h3>
+  <div class="timeline">
+    <div class="timeline-item imp4">
+      <div class="timeline-date">5月26日</div>
+      <div class="timeline-title">长城测井创6米长枪身射孔纪录</div>
+      <div class="timeline-summary">在哈萨克斯坦成功完成6米单次下枪，超越国际同行3米上限，年均节约成本约100万美元。</div>
+    </div>
+    <div class="timeline-item imp4">
+      <div class="timeline-date">5月27日</div>
+      <div class="timeline-title">中海油服发布12项完井增产技术</div>
+      <div class="timeline-summary">包括超高温高压完井工具、油藏水淹反演软件、智能压裂软件等，已在中亚、中东规模化应用。</div>
+    </div>
+    <div class="timeline-item imp4">
+      <div class="timeline-date">5月28日</div>
+      <div class="timeline-title">SLB与Vår Energi扩大数字化合作</div>
+      <div class="timeline-summary">部署Delfi数字平台覆盖勘探开发全流程，协作井规划周期从数月缩短至数天。</div>
+    </div>
+    <div class="timeline-item imp4">
+      <div class="timeline-date">5月29日</div>
+      <div class="timeline-title">中国石油发布大模型应用成果</div>
+      <div class="timeline-summary">戴厚良强调高水平建设"数智中国石油"，发布人工智能大模型及智能化应用。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ TOP COMPANIES ============ -->
+<div class="section">
+  <h2 class="section-title">🏢 关键企业动态</h2>
+  <div class="company-grid" id="companyGrid">
+    <!-- filled by JS -->
+  </div>
+</div>
+
+<!-- ============ TECHNOLOGY TRENDS ============ -->
+<div class="section">
+  <h2 class="section-title">🔬 技术趋势深度分析</h2>
+  <div class="chart-grid">
+    <div class="chart-card">
+      <h4>热点技术关键词</h4>
+      <canvas id="techChart"></canvas>
+    </div>
+    <div class="chart-card">
+      <h4>区域分布</h4>
+      <canvas id="regionChart"></canvas>
+    </div>
+  </div>
+
+  <div class="key-findings" style="margin-top:24px;">
+    <div class="finding-card">
+      <h4>趋势一：AI自主化 — 从辅助工具到核心引擎</h4>
+      <p>5月最显著的趋势是AI技术从"辅助工具"向"核心引擎"的跨越。Baker Hughes Kantori实现全自主建井、神开"蓝小智"AI智能体落地、中石油发布大模型成果——AI已全面渗透规划、执行、监控、优化的全链条。</p>
+    </div>
+    <div class="finding-card">
+      <h4>趋势二：超深/超高温 — 定义测井技术新极限</h4>
+      <p>215°C/207MPa智能钻头、万米深层测井评价、四川盆地页岩油复杂水平井——深地油气开发正在推动测井装备和解释技术向极限挑战。西南油气田测井解释符合率突破90%标志着该方向的技术成熟度达到新高度。</p>
+    </div>
+    <div class="finding-card">
+      <h4>趋势三：油服行业并购整合加速</h4>
+      <p>Expro以2.15亿美元收购Enhanced Drilling拓展MPD技术、Weatherford获得Noble多份深水MPD合同——行业整合与专业分工并行。Equinor 170亿克朗大单的续签进一步证明了油服市场的景气度。</p>
+    </div>
+    <div class="finding-card">
+      <h4>趋势四：数字化平台 — 从数据管理到价值创造</h4>
+      <p>SLB Delfi平台在挪威海上创造"数月→数天"的效率提升、西南油气田构建测井数据湖和智能大脑、中石油推进数智深度融合——数据驱动的价值创造模式正在成形。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ FULL NEWS LIST ============ -->
+<div class="section">
+  <h2 class="section-title">📋 完整新闻列表</h2>
+  <div style="overflow-x:auto;">
+    <table class="news-table" id="newsTable">
+      <thead>
+        <tr>
+          <th style="width:90px">日期</th>
+          <th>标题</th>
+          <th style="width:100px">分类</th>
+          <th style="width:70px">等级</th>
+        </tr>
+      </thead>
+      <tbody id="newsTableBody">
+        <!-- filled by JS -->
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<p style="text-align:center; color: var(--text-light); font-size:0.88em; margin: 40px 0 20px;">
+  * 本报告由穹顶洞察基于公开新闻数据编辑分析，仅供参考。<br>
+  * 数据来源包括各公司官网、行业媒体、学术期刊及公开专利信息。
+</p>
+
+</div>
+
+<footer class="report-footer">
+  <strong>穹顶洞察</strong> · 测井行业技术情报 · 2026年5月趋势分析月报<br>
+  <span style="font-size:0.85em; opacity:0.6;">报告生成于2026年6月3日</span>
+</footer>
+
+<script>
+// ===== Load data =====
+const DATA_URL = '/tmp/monthly_data.json';
+const DATA = {
+  "total": 37, "high_imp": 22, "top5_imp": 5,
+  "imp_dist": {"2": 1, "3": 14, "4": 17, "5": 5},
+  "cat_dist": {"行业动态": 15, "智能测井": 8, "学术会议": 6, "随钻测井": 3, "测井装备": 3, "地层评价": 1, "套管检测": 1},
+  "cat_imp_avg": {"行业动态": 3.3, "智能测井": 4.1, "学术会议": 3.5, "随钻测井": 3.7, "测井装备": 4.7, "地层评价": 5, "套管检测": 4},
+  "top_companies": {"SLB": 5, "Halliburton": 3, "Baker Hughes": 3, "中海油服(COSL)": 2, "中石化经纬": 2, "SPWLA": 2, "中国石油": 2, "Expro": 2, "中海油服": 2, "Weatherford": 1, "中国石油集团工程技术研究院": 1},
+  "top_regions": {"中国": 13, "美国": 8, "国际": 8, "挪威": 3, "中国-北京": 2, "亚洲": 1, "中国-四川盆地": 1, "北美": 1},
+  "top_tech": {"射孔技术": 4, "智能钻井": 2, "自主建井": 2, "人工智能": 2, "超高温传感": 2, "膨胀套管": 2, "管理压力钻井": 2, "地层评价": 2, "数字化平台": 1, "钻头成像": 1, "地层隔离阀": 1, "超深电阻率": 1},
+  "week_dist": {"第1周": 16, "第2周": 5, "第3周": 9, "第4周": 4, "第5周": 3},
+  "news": []
+};
+
+// Build news data inline
+const NEWS = [
+  {date:"5/1", title:"SLB获两项2026 OTC Spotlight Award：Retina钻头成像系统与FIV-III", cat:"智能测井", imp:5, comp:"SLB", tech:"钻头成像, 地层隔离阀", region:"美国", summary:"SLB获得两项OTC聚焦新技术奖。Retina at-bit成像系统集成于PDC钻头中，在钻井冲击前捕获高分辨率井眼图像。"},
+  {date:"5/2", title:"Halliburton EarthStar 3DX水平向前看电阻率获OTC Asia新技术奖", cat:"随钻测井", imp:4, comp:"Halliburton", tech:"随钻测井, 超深电阻率", region:"亚洲", summary:"OTC Asia聚焦新技术奖授予Halliburton EarthStar 3DX，业内最接近钻头的超深电阻率传感器。"},
+  {date:"5/4", title:"OTC 2026在休斯顿开幕，约30,000人参会", cat:"学术会议", imp:4, comp:"OTC", tech:"海上油气", region:"美国", summary:"OTC 2026于5月4-7日举行，设50场技术会议和360+场技术报告。"},
+  {date:"5/4", title:"OTC 2026 Spotlight Award揭晓：17项突破性技术获奖", cat:"行业动态", imp:5, comp:"SLB,BH,CNPC", tech:"自主建井, 钻头成像, 超高温", region:"美国", summary:"17项创新技术获奖，SLB、Baker Hughes、CNPC USA等多企业成果获认可。"},
+  {date:"5/4", title:"Equinor续签170亿克朗钻井服务协议", cat:"行业动态", imp:4, comp:"SLB,HAL,BH,WFT", tech:"钻井服务", region:"挪威", summary:"SLB、Halliburton和Baker Hughes获83亿克朗综合钻井服务合同。"},
+  {date:"5/4", title:"Baker Hughes Kantori自主建井获OTC Spotlight Award", cat:"智能测井", imp:4, comp:"Baker Hughes", tech:"自主建井, AI", region:"美国", summary:"融合AI、物理模型和钻井专业知识，实现规划执行监控优化一体化。"},
+  {date:"5/5", title:"Weatherford获Noble多份MPD合同", cat:"行业动态", imp:3, comp:"Weatherford", tech:"MPD深水钻井", region:"美国/圭亚那", summary:"包括深水MPD系统支持圭亚那运营，覆盖Noble全球船队。"},
+  {date:"5/5", title:"Expro以2.15亿美元收购Enhanced Drilling", cat:"行业动态", imp:3, comp:"Expro", tech:"收购MPD技术", region:"挪威", summary:"收购挪威MPD技术领导者，预计2026年Q3完成，增强钻井能力。"},
+  {date:"5/6", title:"中国石油两项技术斩获OTC聚焦新技术奖", cat:"测井装备", imp:5, comp:"中国石油", tech:"超高温智能钻头, 膨胀套管", region:"中国", summary:"超高温高压智能钻头(215°C/207MPa)和膨胀管等井径钻井技术同时获奖。"},
+  {date:"5/6", title:"Halliburton将在SPWLA推出深部瞬态测试技术", cat:"学术会议", imp:4, comp:"Halliburton", tech:"地层评价", region:"国际", summary:"Reservoir Xaminer系列新成员，钻前提供早期油藏智能。"},
+  {date:"5/7", title:"OTC 2026圆满闭幕", cat:"行业动态", imp:3, comp:"", tech:"", region:"国际", summary:"近25,000人现场参会，近1,000家企业参展，48场技术分会。"},
+  {date:"5/7", title:"电缆测井市场报告：2026-2034年稳健增长", cat:"行业动态", imp:2, comp:"Baker Hughes", tech:"电缆测井", region:"国际", summary:"上游活动复苏和技术进步推动市场扩张，光纤与传统测井融合创新。"},
+  {date:"5/8", title:"中石化经纬等联合申请测井仪器智能控制专利", cat:"智能测井", imp:4, comp:"中石化经纬", tech:"测井仪器智能控制", region:"中国", summary:"实现七参数测井仪器与阵列流量仪器的灵活切换，提高测井效率。"},
+  {date:"5/9", title:"SPWLA第67届年会下周开幕", cat:"学术会议", imp:3, comp:"SPWLA", tech:"", region:"国际", summary:"5月16-20日在德州康罗湖举行，聚焦常规/非常规储层评价、AI测井。"},
+  {date:"5/12", title:"神开推出'蓝小智'AI智能体", cat:"智能测井", imp:4, comp:"神开股份", tech:"AI智能建井", region:"中国-北京", summary:"专为油气建井打造，具备钻井参数优化、风险预警、设备诊断能力。"},
+  {date:"5/13", title:"Baker Hughes与Strohm签约研发超3000米柔性管道", cat:"行业动态", imp:3, comp:"Baker Hughes", tech:"超深水管道", region:"国际", summary:"自重减轻约50%，预计2028年商业化，一季报超预期。"},
+  {date:"5/14", title:"西南油气田测井解释符合率突破90%", cat:"地层评价", imp:5, comp:"中国石油西南油气田", tech:"核磁测井, 智能测井", region:"中国-四川盆地", summary:"基于核磁可动油孔隙度甜点评价新技术，累计服务756口井。"},
+  {date:"5/15", title:"中油测井CPLog装备拓展41国市场", cat:"测井装备", imp:5, comp:"中油测井", tech:"CPLog, 成像测井", region:"中国/国际", summary:"六大系列190种产品，自主装备占比80.3%，技术服务覆盖28国。"},
+  {date:"5/15", title:"油气产业AI大会：加速拥抱人工智能", cat:"智能测井", imp:4, comp:"中国石油/中国石化/中国海油", tech:"AI/数字化", region:"中国-北京", summary:"中石油发布数字融合成果，中石化发布'烽火'工业智能体。"},
+  {date:"5/16", title:"中海油服获井口可视化监测装置专利", cat:"套管检测", imp:4, comp:"中海油服", tech:"可视化套管监测", region:"中国", summary:"集成采油树和影像采集装置，实时传输套管位置图像。"},
+  {date:"5/16", title:"石化油服获偏方位平面射孔方法专利", cat:"行业动态", imp:3, comp:"石化油服", tech:"射孔技术", region:"中国", summary:"改变螺旋布孔为平面射孔，极大降低压裂难度。"},
+  {date:"5/16-20", title:"SPWLA第67届年会举行", cat:"学术会议", imp:3, comp:"SPWLA", tech:"测井技术", region:"美国", summary:"聚集全球测井专家，Halliburton推出深部瞬态测试新服务。"},
+  {date:"5/17", title:"中海油服申请快速测井相划分专利", cat:"智能测井", imp:4, comp:"中海油服(COSL)", tech:"智能测井, 数据融合", region:"中国", summary:"成像与一维测井数据融合成一幅彩色图像，提升划分效率和准确性。"},
+  {date:"5/17", title:"中海油服申请分体导流头专利", cat:"随钻测井", imp:4, comp:"中海油服(COSL)", tech:"随钻测量(LWD/MWD)", region:"中国", summary:"分体式可分离组装，实现加工简便、维修快捷、安装可靠。"},
+  {date:"5/17", title:"中石化经纬等申请原钻机射孔井口安装方法专利", cat:"行业动态", imp:3, comp:"中石化经纬", tech:"射孔技术", region:"中国", summary:"机械化程度高、安全可靠的射孔井口安装方法。"},
+  {date:"5/26", title:"长城测井哈萨克斯坦创6米长枪身射孔纪录", cat:"测井装备", imp:4, comp:"中油测井", tech:"射孔技术", region:"哈萨克斯坦", summary:"6米单次下枪超越国际同行3米上限，年节约约100万美元。"},
+  {date:"5/27", title:"中海油服发布12项完井增产技术", cat:"行业动态", imp:4, comp:"中海油服", tech:"完井增产技术", region:"中国/海外", summary:"含超高温高压完井工具、智能压裂软件，已在中亚、中东规模化应用。"},
+  {date:"5/28", title:"SLB与Vår Energi扩大数字化合作", cat:"智能测井", imp:4, comp:"SLB", tech:"Delfi数字化平台", region:"挪威", summary:"协作井规划周期从数月缩短至数天，覆盖全流程数字化。"},
+  {date:"5/28", title:"中石化经纬人事变动", cat:"行业动态", imp:3, comp:"中石化经纬", tech:"企业管理", region:"中国", summary:"张波升任总经理，曾带领团队在测井关键技术取得突破。"},
+  {date:"5/29", title:"中海油服获随钻套损与固井评价专利", cat:"随钻测井", imp:3, comp:"中海油服", tech:"随钻套损检测", region:"中国", summary:"随钻条件下套管损伤检测与固井质量评价新技术。"},
+  {date:"5/29", title:"中国石油发布大模型应用成果", cat:"智能测井", imp:4, comp:"中国石油", tech:"人工智能大模型", region:"中国", summary:"戴厚良强调高水平建设'数智中国石油'，发布智能化应用。"},
+  {date:"5/30", title:"海油发展招标非常规气井射孔服务", cat:"行业动态", imp:2, comp:"中海油", tech:"射孔技术", region:"中国", summary:"涉及361段泵送桥塞射孔，合同有效期3年。"},
+];
+
+// ===== CHART.JS SETUP =====
+Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans SC', sans-serif";
+Chart.defaults.font.size = 12;
+
+const BLUE = '#2c5f8a';
+const GOLD = '#d4a843';
+const RED = '#e74c3c';
+const GREEN = '#27ae60';
+const colors = ['#2c5f8a','#d4a843','#27ae60','#e74c3c','#8e44ad','#e67e22','#1abc9c','#3498db','#95a5a6','#f39c12'];
+
+// 1. Week distribution
+new Chart(document.getElementById('weekChart'), {
+  type: 'bar',
+  data: {
+    labels: Object.keys(DATA.week_dist),
+    datasets: [{
+      label: '新闻数量',
+      data: Object.values(DATA.week_dist),
+      backgroundColor: Object.values(DATA.week_dist).map((v,i) => i === 0 ? GOLD : BLUE),
+      borderRadius: 4
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: true,
+    plugins: { legend: { display: false } },
+    scales: {
+      y: { beginAtZero: true, ticks: { stepSize: 5 } },
+      x: { grid: { display: false } }
+    }
+  }
+});
+
+// 2. Importance distribution
+const impLabels = ['等级2', '等级3', '等级4', '等级5'];
+const impData = [1, 14, 17, 5];
+new Chart(document.getElementById('impChart'), {
+  type: 'doughnut',
+  data: {
+    labels: impLabels,
+    datasets: [{
+      data: impData,
+      backgroundColor: ['#95a5a6', '#3498db', '#f39c12', '#e74c3c'],
+      borderWidth: 2
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: true,
+    plugins: {
+      legend: { position: 'right', labels: { padding: 12, usePointStyle: true } }
+    }
+  }
+});
+
+// 3. Category distribution
+const catLabels = Object.keys(DATA.cat_dist);
+const catValues = Object.values(DATA.cat_dist);
+new Chart(document.getElementById('catChart'), {
+  type: 'bar',
+  data: {
+    labels: catLabels,
+    datasets: [{
+      label: '新闻数量',
+      data: catValues,
+      backgroundColor: catLabels.map((_, i) => colors[i % colors.length]),
+      borderRadius: 4
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: true,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { beginAtZero: true, ticks: { stepSize: 5 } },
+      y: { grid: { display: false } }
+    }
+  }
+});
+
+// 4. Category avg importance
+const catImpLabels = Object.keys(DATA.cat_imp_avg);
+const catImpValues = Object.values(DATA.cat_imp_avg);
+new Chart(document.getElementById('catImpChart'), {
+  type: 'bar',
+  data: {
+    labels: catImpLabels,
+    datasets: [{
+      label: '平均等级',
+      data: catImpValues,
+      backgroundColor: catImpValues.map(v => v >= 4.5 ? RED : v >= 4 ? GOLD : BLUE),
+      borderRadius: 4
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: true,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { beginAtZero: true, max: 5.5, ticks: { stepSize: 1 } },
+      y: { grid: { display: false } }
+    }
+  }
+});
+
+// 5. Tech keywords
+const techLabels = Object.keys(DATA.top_tech);
+const techValues = Object.values(DATA.top_tech);
+new Chart(document.getElementById('techChart'), {
+  type: 'bar',
+  data: {
+    labels: techLabels,
+    datasets: [{
+      label: '提及次数',
+      data: techValues,
+      backgroundColor: techValues.map(v => v >= 4 ? RED : v >= 3 ? GOLD : BLUE),
+      borderRadius: 4
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: true,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { beginAtZero: true, ticks: { stepSize: 1 } },
+      y: { grid: { display: false } }
+    }
+  }
+});
+
+// 6. Region distribution
+new Chart(document.getElementById('regionChart'), {
+  type: 'doughnut',
+  data: {
+    labels: Object.keys(DATA.top_regions),
+    datasets: [{
+      data: Object.values(DATA.top_regions),
+      backgroundColor: ['#2c5f8a','#d4a843','#27ae60','#e74c3c','#8e44ad','#e67e22','#1abc9c','#3498db'],
+      borderWidth: 2
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: true,
+    plugins: {
+      legend: { position: 'right', labels: { padding: 10, usePointStyle: true, font: { size: 11 } } }
+    }
+  }
+});
+
+// ===== COMPANY GRID =====
+const compData = {
+  "SLB": {count:5, news:["OTC Spotlight Award两项","Equinor 170亿合同","Delfi挪威数字化合作","OTC 2026技术分会"]},
+  "Halliburton": {count:3, news:["EarthStar 3DX OTC Asia奖","SPWLA深部瞬态测试","Equinor 170亿合同"]},
+  "Baker Hughes": {count:3, news:["Kantori自主建井OTC奖","Strohm超深水管道","Equinor 170亿合同"]},
+  "Weatherford": {count:2, news:["Noble MPD合同","Equinor 170亿合同"]},
+  "中海油服(COSL)": {count:2, news:["测井相划分专利","分体导流头专利"]},
+  "中海油服": {count:2, news:["12项完井增产技术","井口可视化监测专利"]},
+  "中石化经纬": {count:2, news:["测井仪器控制专利","射孔井口安装专利"]},
+  "中国石油": {count:2, news:["超高温智能钻头OTC奖","大模型应用成果发布"]},
+  "中油测井": {count:2, news:["CPLog 41国","长城测井射孔纪录"]},
+};
+
+const grid = document.getElementById('companyGrid');
+Object.entries(compData).forEach(([name, info]) => {
+  const card = document.createElement('div');
+  card.className = 'company-card';
+  let newsHtml = info.news.map(n => `<li>${n}</li>`).join('');
+  card.innerHTML = `
+    <h4>${name} <span class="count">${info.count}</span></h4>
+    <ul>${newsHtml}</ul>
+  `;
+  grid.appendChild(card);
+});
+
+// ===== NEWS TABLE =====
+const tbody = document.getElementById('newsTableBody');
+NEWS.forEach(n => {
+  const tr = document.createElement('tr');
+  const impClass = 'imp-' + n.imp;
+  tr.innerHTML = `
+    <td>${n.date}</td>
+    <td><strong>${n.title}</strong><br><span style="font-size:0.82em;color:#636e72;">${n.comp} · ${n.summary.substring(0, 50)}...</span></td>
+    <td>${n.cat}</td>
+    <td><span class="imp-tag ${impClass}">Lv.${n.imp}</span></td>
+  `;
+  tbody.appendChild(tr);
+});
+</script>
+
+</body>
+</html>
